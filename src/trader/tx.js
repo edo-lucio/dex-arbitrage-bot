@@ -278,8 +278,8 @@ class Tx {
     async update(order, price, bid, pair, side) {
             const isLive = Helpers.isLive(order);
 
-            if(bid <= pair.minbuy) return;
-            if(bid <= pair.minsell) return;
+            if(bid <= pair.minBuy) return;
+            if(bid <= pair.minSell) return;
     
             if (isLive) {
                 const needPriceUpdate = Helpers.needUpdate(order, price, bid);
