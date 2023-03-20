@@ -81,12 +81,10 @@ class BuySwap extends Trader {
         // this.order = await MarketData.checkMyOrder("buy", this.tokenPair, this.order);
         const tradeData = await this.checkSide("buy");
         const quoteBalance = await rpc.getAssetBalance(this.tokenPair.quoteContract, this.address, this.tokenPair.quoteSymbol);
-        const quotePercentage = quoteBalance / tradeData.maxQuoteBid;
-
-        console.log(tradeData.bestPrice);
+        const quotePercentage = (quoteBalance / tradeData.maxQuoteBid) * 100;
 
         if (quotePercentage >= config.QUOTE_LIMIT_PERCENTAGE) {
-            await super.swapForBase(tradeData.tokenBalance, tradeData.poolData.price, this.tokenPair, tradeData.priceImpact);
+            await super.swapForBase(quoteBalance, tradeData.poolData.price, this.tokenPair, tradeData.priceImpact);
         }
 
         if (tradeData.spread >= this.spreadLimit) {
@@ -97,8 +95,8 @@ class BuySwap extends Trader {
         // if spread is closed delete order if open and wait
         if (this.order["buy"]) {
             await this.cancelOrder(this.order["buy"]);
-            console.log("Waiting for the spread");
         }
+        console.log("Waiting for the spread");
     }
 }
 
