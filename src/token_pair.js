@@ -43,6 +43,9 @@ class TokenPair {
             if (BANNED_CONTRACTS.includes(markets[i].quote_token.contract))
                 continue;
 
+            this.minBuy = markets[i].min_buy;
+            this.minSell = markets[i].min_sell;
+
             // base token data
             this.baseSymbol = markets[i].base_token.symbol.name;
             this.baseDecimals = markets[i].base_token.symbol.precision;
@@ -106,9 +109,10 @@ class TokenPair {
 }
 
 module.exports = { TokenPair };
-async function getTokenPairTest() {
-    const pair = { quote_token: "MARTIA", base_token: "WAX" };
-    const token = new TokenPair(pair);
-    await token.init();
-    console.log(token);
-}
+
+// async function getTokenPairTest() {
+//     const pair = { quote_token: "MARTIA", base_token: "WAX" };
+//     const token = new TokenPair(pair);
+//     await token.init();
+//     console.log(token);
+// }
