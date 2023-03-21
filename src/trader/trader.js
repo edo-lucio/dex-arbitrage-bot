@@ -140,19 +140,10 @@ class SwapSell extends Trader {
         const quoteBalance = await rpc.getAssetBalance(this.tokenPair.quoteContract, this.address, this.tokenPair.quoteSymbol);
         const orderBid = this.order["sell"]?.bid ?? 0
         const totQuoteBalance = quoteBalance + orderBid;
-
-        if (totQuoteBalance > tradeData.maxQuoteBid * 1.5) {
-            console.log("88888888", this.tokenPair.market);
-            throw Error("Quote balance is more than expected");
-        }
-
-        if (totQuoteBalance < tradeData.maxQuoteBid) {
-            this.quoteBid = totQuoteBalance;
-        }
+        this.quoteBid = totQuoteBalance;
 
         // refill
         if (totQuoteBalance < tradeData.maxQuoteBid * 0.8) {
-            console.log("Refill")
             const quoteShortage = tradeData.maxQuoteBid - totQuoteBalance;
             const baseShortage = quoteShortage * tradeData.poolData.price;
             const quoteRefill = await super.swapForQuote(baseShortage, tradeData.poolData.price, this.tokenPair, tradeData.priceImpact);
@@ -216,7 +207,7 @@ class BuySell extends Trader {
         const maxQuoteBid = this.baseBid / bestBuy;
         this.quoteBid = maxQuoteBid;
 
-        if (totQuoteBalance > maxQuoteBid * 1.2) {
+        if (totQuoteBalance > maxQuoteBid * 1.5) {
             throw Error("Quote balance is more than expected")
         }
 
