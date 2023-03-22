@@ -132,7 +132,7 @@ class Tx {
 
     // prettier-ignore
     async cancelOrder(order) {
-        if(!order) return;
+        if(!order.id) return;
         const action = {
             account: "alcordexmain",
             name: `cancel${order.side}`,
