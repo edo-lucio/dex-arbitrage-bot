@@ -154,11 +154,7 @@ class SwapSell extends Trader {
             this.order["sell"] = await super.update(this.order["sell"], tradeData.bestPrice, this.quoteBid, this.tokenPair, "sell");
             return
         }
-
-        if (this.order["sell"]) {
-            await this.cancelOrder(this.order["sell"]);
-            console.log("Waiting for the spread");
-        }
+        console.log("Waiting for the spread");
     }
 }
 
