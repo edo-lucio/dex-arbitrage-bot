@@ -132,7 +132,6 @@ class Tx {
 
     // prettier-ignore
     async cancelOrder(order) {
-        if(!order.id) return;
         const action = {
             account: "alcordexmain",
             name: `cancel${order.side}`,
@@ -259,8 +258,12 @@ class Tx {
 
     // update an order by deleting the old one and placing another one at a given price
     async updateOrder(order, price, bid, pair) {
+        console.log(pair, order);
         const [success, error] = await this.cancelOrder(order);
-        if (error) return order; // this prevents from making another order if for some reason it couldn't find order
+        if (error) {
+            console.log(error);
+            return order; // this prevents from making another order if for some reason it couldn't find order
+        }
 
         if (order.side == "buy") {
             const order = await this.buy(bid, price, pair);
@@ -306,8 +309,6 @@ class Tx {
                     return newOrder;
                 }
             }
-    
-
         }
 }
 
