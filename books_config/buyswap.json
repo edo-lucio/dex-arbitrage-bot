@@ -4,319 +4,313 @@
       "market": { "base_token": "WAX", "quote_token": "CAIT" },
       "bid": 9.8,
       "spread": 2.4,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "PGL" },
       "bid": 20,
       "spread": 2.4,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "BTK" },
       "bid": 50,
       "spread": 2.0,
-      "lookup": 0
+      "wait": 0
     },
     {
       "market": { "base_token": "WAX", "quote_token": "NOVO" },
       "bid": 100,
       "spread": 2.4,
-      "lookup": 0
+      "wait": 0
     },
     {
       "market": { "base_token": "WAX", "quote_token": "FWW" },
       "bid": 40,
       "spread": 2.9,
-      "lookup": 0
+      "wait": 0
     },
     {
       "market": { "base_token": "WAX", "quote_token": "SCRAP" },
       "bid": 20,
       "spread": 2.9,
-      "lookup": 0
+      "wait": 0
     },
     {
       "market": { "base_token": "WAX", "quote_token": "ARCTH" },
       "bid": 20,
       "spread": 2.9,
-      "lookup": 50000
+      "wait": 50000
     },
      {
       "market": { "base_token": "WAX", "quote_token": "DINO" },
-      "bid": 49.8,
+      "bid": 9.8,
       "spread": 1.9,
-      "lookup": 50000
+      "wait": 50000
     },
      {
       "market": { "base_token": "WAX", "quote_token": "TLM" },
       "bid": 49.8,
       "spread": 1.7,
-      "lookup": 50000
-    },
-     {
-      "market": { "base_token": "WAX", "quote_token": "GEM" },
-      "bid": 39.8,
-      "spread": 2.0,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "MWM" },
-      "bid": 39.8,
-      "spread": 2.7,
-      "lookup": 50000
+      "bid": 9.8,
+      "spread": 5.7,
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "XYTE" },
       "bid": 9.8,
       "spread": 2.4,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "FATE" },
       "bid": 20,
       "spread": 1.8,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "CBIT" },
       "bid": 9.8,
       "spread": 2.8,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "EGG" },
       "bid": 40,
       "spread": 2.4,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "BLKHL" },
       "bid": 20,
       "spread": 1,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "XPS" },
       "bid": 40,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "FGL" },
       "bid": 9.8,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "BOOM" },
       "bid": 40,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "WECAN" },
       "bid": 9.8,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "TACO" },
       "bid": 30,
       "spread": 1.8,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "NEFTY" },
       "bid": 40,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "MARTIA" },
       "bid": 40,
       "spread": 2.0,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "KYANITE" },
       "bid": 9.8,
       "spread": 2,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "RDAO" },
       "bid": 10,
       "spread": 2,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "SDM" },
       "bid": 20,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "BAM" },
       "bid": 20,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "ESB" },
       "bid": 20,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "TOCIUM" },
       "bid": 20,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "RLM" },
       "bid": 40,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "AWC" },
       "bid": 30,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "LANBX" },
       "bid": 30,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "CAT" },
       "bid": 9.8,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "AETHER" },
       "bid": 40,
       "spread": 2.8,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "FUEL" },
       "bid": 9.8,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "BGALPHA" },
       "bid": 9.8,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "SEST" },
       "bid": 80,
       "spread": 1.9,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "YGD" },
       "bid": 9.8,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "LOOT" },
       "bid": 20,
       "spread": 1.5,
-      "lookup": 0
+      "wait": 0
     },
     {
       "market": { "base_token": "WAX", "quote_token": "LTK" },
       "bid": 20,
       "spread": 1.9,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "MSOURCE" },
       "bid": 40,
       "spread": 1.8,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "HEL" },
       "bid": 9.8,
       "spread": 1.9,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "BRWL" },
       "bid": 100,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "DUSK" },
       "bid": 88,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "NOA" },
       "bid": 20,
       "spread": 2.8,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "SHING" },
       "bid": 30,
       "spread": 2.8,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "MRP" },
       "bid": 39.8,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "GME" },
       "bid": 9.8,
       "spread": 1.5,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "GMM" },
       "bid": 30,
       "spread": 4,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "WAXON" },
       "bid": 9.8,
       "spread": 4,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "SNAKOIL" },
       "bid": 20,
       "spread": 4,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "WOMBAT" },
       "bid": 25,
       "spread": 1.9,
-      "lookup": 50000
+      "wait": 50000
     },
     {
       "market": { "base_token": "WAX", "quote_token": "HWB" },
       "bid": 9.8,
       "spread": 1.8,
-      "lookup": 50000
+      "wait": 50000
     }
   ]
 }
