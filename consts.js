@@ -43,7 +43,7 @@ module.exports = Object.freeze({
     },
 
     // swap fees
-    FEES: 0.4,
+    FEES: 0.58,
 
     // key to get orders from orderbook in descending order by price
     SORTED_ORDER_KEY: "i128",
