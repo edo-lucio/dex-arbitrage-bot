@@ -40,9 +40,16 @@ class PoolData {
         }
     }
 
-    static async getPriceImpact(liquidity, tokenPair, bidQuantity) {
-        const tokenALiquidity = liquidity[tokenPair.baseSymbol];
-        const tokenBLiquidity = liquidity[tokenPair.quoteSymbol];
+    static getPriceImpact(liquidity, tokenPair, bidQuantity, bidType) {
+        const tokenALiquidity =
+            bidType === "base"
+                ? liquidity[tokenPair.baseSymbol]
+                : liquidity[tokenPair.quoteSymbol];
+
+        const tokenBLiquidity =
+            bidType === "quote"
+                ? liquidity[tokenPair.baseSymbol]
+                : liquidity[tokenPair.quoteSymbol];
 
         // calculate the market price
         const marketPrice = tokenALiquidity / tokenBLiquidity;
@@ -64,9 +71,10 @@ class PoolData {
 
         // calculate the price impact
         let priceImpact = 100 - (marketPrice / newPrice) * 100;
+
         priceImpact += consts.FEES;
 
-        return priceImpact;
+        return priceImpact.toFixed(2);
     }
 }
 
