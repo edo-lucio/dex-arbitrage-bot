@@ -43,22 +43,13 @@ module.exports = Object.freeze({
     },
 
     // swap fees
-    FEES: 0.58,
+    FEES: 0.4,
 
     // key to get orders from orderbook in descending order by price
     SORTED_ORDER_KEY: "i128",
 
     // sides
     side: { sell: "sell", buy: "buy" },
-
-    // token's contract of dead token with identical symbol to others
-    BANNED_TOKENS_CONTRACTS: [
-        "underwtokens",
-        "metaversedmt",
-        "shmothership",
-        "unboundtoken",
-        "gems.tycoon",
-    ],
 
     // credential to connect to mariadb
     MEMENTO_CREDENTIALS: {

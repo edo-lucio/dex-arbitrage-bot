@@ -48,7 +48,7 @@ module.exports = Object.freeze({
         "unboundtoken",
         "gems.tycoon",
         "goldenfarmtk",
-        "vladwaves",
+        "vladwaves123",
     ],
 
     TAPOS: {
