@@ -26,9 +26,10 @@ class Trader extends Tx {
 
     // prettier-ignore
     async checkSide(side) {
+        const bidType = side === "buy" ? "base" : "quote";
         const bestPrice = await MarketData.getBestPrice(side, this.tokenPair, this.address);
         const poolData = await PoolData.getPoolData(this.tokenPair);
-        const priceImpact = await PoolData.getPriceImpact(poolData.liquidity, this.tokenPair, this.baseBid);
+        const priceImpact = await PoolData.getPriceImpact(poolData.liquidity, this.tokenPair, this.baseBid, bidType);
         const spread = Math.abs(100 - (poolData.price / bestPrice) * 100) - priceImpact;
         const maxQuoteBid = this.baseBid / poolData.price;
 
@@ -84,7 +85,7 @@ class BuySwap extends Trader {
         const quotePercentage = (quoteBalance / tradeData.maxQuoteBid) * 100;
 
         if (quotePercentage >= config.QUOTE_LIMIT_PERCENTAGE) {
-            await super.swapForBase(quoteBalance, tradeData.poolData.price, this.tokenPair, tradeData.priceImpact);
+            await super.swapForBase(quoteBalance, tradeData.poolData.price, this.tokenPair);
         }
 
         if (tradeData.spread >= this.spreadLimit) {
@@ -146,7 +147,7 @@ class SwapSell extends Trader {
         if (totQuoteBalance < tradeData.maxQuoteBid * 0.8) {
             const quoteShortage = tradeData.maxQuoteBid - totQuoteBalance;
             const baseShortage = quoteShortage * tradeData.poolData.price;
-            const quoteRefill = await super.swapForQuote(baseShortage, tradeData.poolData.price, this.tokenPair, tradeData.priceImpact);
+            const quoteRefill = await super.swapForQuote(baseShortage, tradeData.poolData.price, this.tokenPair);
             this.quoteBid = quoteRefill + totQuoteBalance;
         }
         
