@@ -154,7 +154,7 @@ class SwapSell extends Trader {
             this.order["sell"] = await super.update(this.order["sell"], tradeData.bestPrice, this.quoteBid, this.tokenPair, "sell");
             return
         }
-        console.log("Waiting for the spread");
+        console.log("Waiting for the spread", this.tokenPair.market);
     }
 }
 
@@ -185,7 +185,6 @@ class BuySell extends Trader {
 
     // prettier-ignore
     async lookUp() {
-        console.log("------------------------------------------------------------")
         console.log("Fetching", this.tokenPair.market);
 
         // market price data
