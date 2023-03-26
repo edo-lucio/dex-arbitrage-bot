@@ -12,7 +12,7 @@ class Helpers {
 
     /* check if order is live */
     static isLive(order) {
-        const res = typeof order == "undefined" ? false : true;
+        const res = typeof order === "undefined" ? false : true;
         return res;
     }
 
