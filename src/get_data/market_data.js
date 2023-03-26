@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
 const { RpcWrapper } = require("wax-bot-lib");
-const { Utils } = require("../utils");
 const { Helpers } = require("./helpers");
 const { TokenPair } = require("../token_pair");
 
@@ -67,8 +66,6 @@ class MarketData {
                 continue;
             }
         }
-
-        return {};
     }
 }
 
