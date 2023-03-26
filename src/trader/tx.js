@@ -258,7 +258,6 @@ class Tx {
 
     // update an order by deleting the old one and placing another one at a given price
     async updateOrder(order, price, bid, pair) {
-        console.log(pair, order);
         const [success, error] = await this.cancelOrder(order);
         if (error) {
             console.log(error);
