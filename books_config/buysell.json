@@ -1,9 +1,21 @@
 {
     "books": [
         {
-            "market": { "base_token": "WAX", "quote_token": "GLORY" },
-            "bid": 21,
-            "spread": 3.1,
+            "market": { "base_token": "WAX", "quote_token": "HEELS" },
+            "bid": 6,
+            "spread": 1,
+            "wait": 0
+        },
+        {
+            "market": { "base_token": "WAX", "quote_token": "DOVR" },
+            "bid": 10,
+            "spread": 1,
+            "wait": 0
+        },
+        {
+            "market": { "base_token": "WAX", "quote_token": "DOVS" },
+            "bid": 8,
+            "spread": 1,
             "wait": 0
         }
     ]

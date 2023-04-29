@@ -17,11 +17,11 @@ class PoolData {
 
         const { rows } = await rpc.fetchTable(table);
 
-        const poolA = String(rows[0].pool1.quantity).replace(/[^A-Za-z]+/g, "");
-        const poolB = String(rows[0].pool2.quantity).replace(/[^A-Za-z]+/g, "");
+        const poolA = String(rows[0].tokenA.quantity).replace(/[^A-Za-z]+/g, "");
+        const poolB = String(rows[0].tokenB.quantity).replace(/[^A-Za-z]+/g, "");
 
-        const qtyA = parseFloat(rows[0].pool1.quantity.replace(/[A-Za-z]+/g, ""));
-        const qtyB = parseFloat(rows[0].pool2.quantity.replace(/[A-Za-z]+/g, ""));
+        const qtyA = parseFloat(rows[0].tokenA.quantity.replace(/[A-Za-z]+/g, ""));
+        const qtyB = parseFloat(rows[0].tokenB.quantity.replace(/[A-Za-z]+/g, ""));
 
         if (poolA === tokenPair.baseSymbol) {
             const price = qtyA / qtyB;
