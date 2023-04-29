@@ -201,9 +201,9 @@ class Tx {
             ],
             data: {
                 from: this.wallet.executorAddress,
-                memo: `${baseAmountOut} ${tokenPair.baseSymbol}@${tokenPair.baseContract}`,
+                memo: `swapexactin#${tokenPair.poolId}#${this.wallet.executorAddress}#${baseAmountOut} ${tokenPair.baseSymbol}@${tokenPair.baseContract}#0`,
                 quantity: `${quoteQty} ${tokenPair.quoteSymbol}`,
-                to: `alcorammswap`,
+                to: consts.ALCORAMMSWAP_CONTRACT,
             },
         };
 
@@ -248,9 +248,9 @@ class Tx {
             ],
             data: {
                 from: this.wallet.executorAddress,
-                memo: `${quoteAmountOut} ${tokenPair.quoteSymbol}@${tokenPair.quoteContract}`,
+                memo: `swapexactin#${tokenPair.poolId}#${this.wallet.executorAddress}#${quoteAmountOut} ${tokenPair.quoteSymbol}@${tokenPair.quoteContract}#0`,
                 quantity: `${baseQty} ${tokenPair.baseSymbol}`,
-                to: `alcorammswap`,
+                to: consts.ALCORAMMSWAP_CONTRACT,
             },
         };
 

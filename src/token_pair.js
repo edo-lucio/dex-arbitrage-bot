@@ -3,16 +3,17 @@ const { RpcWrapper } = require("wax-bot-lib");
 
 const axios = require("axios");
 const config = require("../config");
+const consts = require("../consts");
 
 const rpc = new RpcWrapper(config.SERVER_ENDPOINT);
 const BANNED_CONTRACTS = config.BANNED_TOKENS_CONTRACTS;
 
 function extractPoolInfo(pair, side) {
-    const index = side === "base" ? 1 : 2;
+    const index = side === "base" ? "B" : "A";
 
     // prettier-ignore
-    const symbol = String(pair[`pool${index}`].quantity).replace(/[^A-Za-z]+/g, "");
-    const contract = pair[`pool${index}`].contract;
+    const symbol = String(pair[`token${index}`].quantity).replace(/[^A-Za-z]+/g, "");
+    const contract = pair[`token${index}`].contract;
     const token = { symbol: symbol, contract: contract };
 
     return token;
@@ -69,9 +70,9 @@ class TokenPair {
 
     async getPoolID() {
         const tableData = {
-            code: "alcorammswap",
-            scope: "alcorammswap",
-            table: "pairs",
+            code: consts.ALCORAMMSWAP_CONTRACT,
+            scope: consts.ALCORAMMSWAP_CONTRACT,
+            table: "pools",
             limit: 1000,
             lower_bound: 0,
         };
@@ -110,9 +111,11 @@ class TokenPair {
 
 module.exports = { TokenPair };
 
-// async function getTokenPairTest() {
-//     const pair = { quote_token: "MARTIA", base_token: "WAX" };
-//     const token = new TokenPair(pair);
-//     await token.init();
-//     console.log(token);
-// }
+async function getTokenPairTest() {
+    const pair = { quote_token: "MARTIA", base_token: "WAX" };
+    const token = new TokenPair(pair);
+    await token.init();
+    console.log(token);
+}
+
+getTokenPairTest();
