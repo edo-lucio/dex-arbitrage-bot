@@ -31,13 +31,13 @@ module.exports = Object.freeze({
     ],
 
     // alcorammswap contract to send tokens to
-    ALCORAMMSWAP_CONTRACT: "alcorammswap",
+    ALCORAMMSWAP_CONTRACT: "swap.alcor",
 
     // table data for fetching alcorammswap
     ALCORAMMSWAP_TABLE: {
-        code: "alcorammswap",
-        scope: "alcorammswap",
-        table: "pairs",
+        code: "swap.alcor",
+        scope: "swap.alcor",
+        table: "pools",
         lower_bound: 0, // changes
         upper_bound: 0, // changes
     },
