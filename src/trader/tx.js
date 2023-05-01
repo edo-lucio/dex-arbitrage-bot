@@ -168,12 +168,12 @@ class Tx {
     if it's higher you get the full quanity */
     // prettier-ignore
     async swapForBase(quoteQty, poolPrice, tokenPair) {
-        const poolData = await PoolData.getPoolData(this.tokenPair);
-        const priceImpact = PoolData.getPriceImpact(poolData.liquidity, tokenPair, quoteQty, "quote");
+        const priceImpact = await PoolData.getPriceImpact(tokenPair.base, tokenPair.quote, quoteQty);
         let baseAmountOut = quoteQty * poolPrice;
         
         baseAmountOut = baseAmountOut - baseAmountOut * (priceImpact / 100);
         baseAmountOut = Utils.fix(baseAmountOut, tokenPair.baseDecimals);
+        console.log(baseAmountOut);
 
         quoteQty = Utils.fix(quoteQty, tokenPair.quoteDecimals);
 
@@ -216,8 +216,7 @@ class Tx {
 
     // prettier-ignore
     async swapForQuote(baseQty, poolPrice, tokenPair) {
-        const poolData = await PoolData.getPoolData(this.tokenPair);
-        const priceImpact = PoolData.getPriceImpact(poolData.liquidity, tokenPair, baseQty, "base");
+        const priceImpact = await PoolData.getPriceImpact(tokenPair.base, tokenPair.quote, quoteQty);
         let quoteAmountOut = baseQty / poolPrice;
         quoteAmountOut = quoteAmountOut - quoteAmountOut * (priceImpact / 100);
         quoteAmountOut = Utils.fix(quoteAmountOut, tokenPair.quoteDecimals);

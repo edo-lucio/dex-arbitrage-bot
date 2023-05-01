@@ -5,6 +5,7 @@ module.exports = Object.freeze({
     },
 
     ALCOR_CONTRACT: "alcordexmain",
+    ALCOR_ENDPOINT: `https://alcor.exchange/api/v2/swapRouter/getRoute?trade_type=EXACT_INPUT&input=%s-%s&output=%s-%s&amount=%d&slippage=0.30&receiver=alcordexfund&maxHops=2`,
 
     // endpoints to grab transactions from
     HYPERION_ENDPOINTS: [
@@ -43,7 +44,7 @@ module.exports = Object.freeze({
     },
 
     // swap fees
-    FEES: 0.4,
+    FEES: 1,
 
     // key to get orders from orderbook in descending order by price
     SORTED_ORDER_KEY: "i128",

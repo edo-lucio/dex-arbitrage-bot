@@ -65,6 +65,16 @@ class TokenPair {
 
             this.marketId = markets[i].id;
             this.market = this.baseSymbol + "/" + this.quoteSymbol;
+
+            this.base = {
+                symbol: this.baseSymbol,
+                contract: this.baseContract,
+            };
+
+            this.quote = {
+                symbol: this.quoteSymbol,
+                contract: this.quoteContract,
+            };
         }
     }
 

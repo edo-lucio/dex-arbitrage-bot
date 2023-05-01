@@ -26,12 +26,11 @@ class Trader extends Tx {
 
     // prettier-ignore
     async checkSide(side) {
-        const bidType = side === "buy" ? "base" : "quote";
         const bestPrice = await MarketData.getBestPrice(side, this.tokenPair, this.address);
-        const poolData = await PoolData.getPoolData(this.tokenPair);
-        const priceImpact = await PoolData.getPriceImpact(poolData.liquidity, this.tokenPair, this.baseBid, bidType);
-        const spread = Math.abs(100 - (poolData.price / bestPrice) * 100) - priceImpact;
-        const maxQuoteBid = this.baseBid / poolData.price;
+        const poolPrice = await PoolData.getPrices(this.tokenPair);
+        const priceImpact = await PoolData.getPriceImpact(this.tokenPair.base, this.tokenPair.quote, this.baseBid);
+        const spread = Math.abs(100 - (poolPrice / bestPrice) * 100) - priceImpact;
+        const maxQuoteBid = this.baseBid / poolPrice;
 
         this.quoteBid = maxQuoteBid;
         this.order[side] = await MarketData.checkMyOrder(side, this.tokenPair, this.order[side]);
@@ -39,7 +38,7 @@ class Trader extends Tx {
         return { 
             maxQuoteBid: maxQuoteBid,
             bestPrice: bestPrice,
-            poolData: poolData,
+            poolPrice: poolPrice,
             priceImpact: priceImpact,
             spread: spread,
         }
@@ -85,7 +84,7 @@ class BuySwap extends Trader {
         const quotePercentage = (quoteBalance / tradeData.maxQuoteBid) * 100;
 
         if (quotePercentage >= config.QUOTE_LIMIT_PERCENTAGE) {
-            await super.swapForBase(quoteBalance, tradeData.poolData.price, this.tokenPair);
+            await super.swapForBase(quoteBalance, tradeData.poolPrice, this.tokenPair);
         }
 
         if (tradeData.spread >= this.spreadLimit) {
@@ -146,8 +145,8 @@ class SwapSell extends Trader {
         // refill
         if (totQuoteBalance < tradeData.maxQuoteBid * 0.8) {
             const quoteShortage = tradeData.maxQuoteBid - totQuoteBalance;
-            const baseShortage = quoteShortage * tradeData.poolData.price;
-            const quoteRefill = await super.swapForQuote(baseShortage, tradeData.poolData.price, this.tokenPair);
+            const baseShortage = quoteShortage * tradeData.poolPrice.price;
+            const quoteRefill = await super.swapForQuote(baseShortage, tradeData.poolPrice.price, this.tokenPair);
             this.quoteBid = quoteRefill + totQuoteBalance;
         }
         
