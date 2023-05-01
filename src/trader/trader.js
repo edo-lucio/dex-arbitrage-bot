@@ -146,7 +146,7 @@ class SwapSell extends Trader {
         // refill
         if (totQuoteBalance < tradeData.maxQuoteBid * 0.8) {
             const quoteShortage = tradeData.maxQuoteBid - totQuoteBalance;
-            const baseShortage = quoteShortage * tradeData.poolPrice;
+            const baseShortage = (quoteShortage * tradeData.poolPrice).toFixed(this.tokenPair.quoteDecimals);
             const quoteRefill = await super.swapForQuote(baseShortage, tradeData.poolPrice, this.tokenPair);
             this.quoteBid = quoteRefill + totQuoteBalance;
         }

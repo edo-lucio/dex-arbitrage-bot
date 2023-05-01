@@ -90,7 +90,6 @@ class PoolData {
     }
 
     static async getPriceImpact(tokenA, tokenB, quantity) {
-        console.log(quantity);
         const url = util.format(
             consts.ALCOR_ENDPOINT,
             tokenA.symbol.toLowerCase(),
