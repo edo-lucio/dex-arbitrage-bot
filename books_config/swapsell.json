@@ -1,8 +1,8 @@
 {
     "books": [
         {
-            "market": { "base_token": "WAX", "quote_token": "TACO" },
-            "bid": 19.8,
+            "market": { "base_token": "WAX", "quote_token": "PGL" },
+            "bid": 9.8,
             "spread": 1.5,
             "wait": 50000
         }
