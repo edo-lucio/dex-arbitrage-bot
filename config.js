@@ -49,6 +49,7 @@ module.exports = Object.freeze({
         "gems.tycoon",
         "goldenfarmtk",
         "vladwaves123",
+        "modernworldt",
     ],
 
     TAPOS: {

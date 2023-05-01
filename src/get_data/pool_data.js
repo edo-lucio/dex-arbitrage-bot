@@ -85,11 +85,12 @@ class PoolData {
             });
             
             const quoteToken = getQuoteToken(tokenA, tokenB, tokenPair);
-            return pool.priceOf(quoteToken).toFixed();
+            return pool.priceOf(quoteToken).toFixed(8);
         }
     }
 
     static async getPriceImpact(tokenA, tokenB, quantity) {
+        console.log(quantity);
         const url = util.format(
             consts.ALCOR_ENDPOINT,
             tokenA.symbol.toLowerCase(),

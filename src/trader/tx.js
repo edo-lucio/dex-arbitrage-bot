@@ -216,7 +216,7 @@ class Tx {
 
     // prettier-ignore
     async swapForQuote(baseQty, poolPrice, tokenPair) {
-        const priceImpact = await PoolData.getPriceImpact(tokenPair.base, tokenPair.quote, quoteQty);
+        const priceImpact = await PoolData.getPriceImpact(tokenPair.base, tokenPair.quote, baseQty);
         let quoteAmountOut = baseQty / poolPrice;
         quoteAmountOut = quoteAmountOut - quoteAmountOut * (priceImpact / 100);
         quoteAmountOut = Utils.fix(quoteAmountOut, tokenPair.quoteDecimals);
@@ -252,6 +252,8 @@ class Tx {
                 to: consts.ALCORAMMSWAP_CONTRACT,
             },
         };
+
+        console.log(action)
 
         const [response, error] = await this.sender.sendTx([action], config.TAPOS);
 

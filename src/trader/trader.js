@@ -31,6 +31,7 @@ class Trader extends Tx {
         const priceImpact = await PoolData.getPriceImpact(this.tokenPair.base, this.tokenPair.quote, this.baseBid);
         const spread = Math.abs(100 - (poolPrice / bestPrice) * 100) - priceImpact;
         const maxQuoteBid = this.baseBid / poolPrice;
+        console.log(maxQuoteBid, poolPrice);
 
         this.quoteBid = maxQuoteBid;
         this.order[side] = await MarketData.checkMyOrder(side, this.tokenPair, this.order[side]);
@@ -145,8 +146,8 @@ class SwapSell extends Trader {
         // refill
         if (totQuoteBalance < tradeData.maxQuoteBid * 0.8) {
             const quoteShortage = tradeData.maxQuoteBid - totQuoteBalance;
-            const baseShortage = quoteShortage * tradeData.poolPrice.price;
-            const quoteRefill = await super.swapForQuote(baseShortage, tradeData.poolPrice.price, this.tokenPair);
+            const baseShortage = quoteShortage * tradeData.poolPrice;
+            const quoteRefill = await super.swapForQuote(baseShortage, tradeData.poolPrice, this.tokenPair);
             this.quoteBid = quoteRefill + totQuoteBalance;
         }
         
