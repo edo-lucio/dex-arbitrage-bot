@@ -37,10 +37,12 @@ class Helpers {
 
     /* check if price is higher than 1 percent on the best price */
     static isNotOptimized(order, bestPrice) {
+        bestPrice = parseFloat(bestPrice);
+
         if (order.side === "buy") {
+            console.log("best price", order.unit_price);
             const res =
                 order.unit_price > bestPrice + bestPrice * 0.01 ? true : false;
-
             return res;
         }
 

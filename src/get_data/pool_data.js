@@ -10,12 +10,12 @@ const {
     Percent,
 } = require("@alcorexchange/alcor-swap-sdk");
 
-const { JsonRpc } = require("eosjs");
+const { RpcWrapper } = require("wax-bot-lib");
 
 const { asset } = require("eos-common");
 
 const consts = require("../../consts");
-const rpc = new JsonRpc("https://waxnode02.alcor.exchange", { fetch });
+const rpc = new RpcWrapper("https://waxnode02.alcor.exchange");
 
 function getQuoteToken(tokenA, tokenB, tokenPair) {
     if (tokenA.symbol === tokenPair.quoteSymbol) {
@@ -51,7 +51,7 @@ async function getAllPools() {
     let p = [];
 
     while (pairs.more) {
-        pairs = await rpc.get_table_rows(tableData);
+        pairs = await rpc.fetchTable(tableData);
         p = p.concat(pairs.rows);
 
         tableData.lower_bound = pairs.next_key;
@@ -75,7 +75,7 @@ class PoolData {
 
             if (tokenA.symbol != tokenPair.quoteSymbol && tokenB.symbol != tokenPair.quoteSymbol)
                 continue;
-
+            
             const pool = new Pool({
                 ...pools[i],
                 tokenA: tokenA,
@@ -99,25 +99,30 @@ class PoolData {
             quantity
         );
 
-        const response = await fetch(url);
-        const data = await response.json();
-        return parseFloat(data.priceImpact) + consts.FEES;
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            return parseFloat(data.priceImpact) + consts.FEES;
+        } catch (error) {
+            console.log(error);
+            return this.getPriceImpact(tokenA, tokenB, quantity);
+        }
     }
 }
 
 module.exports = { PoolData };
 
-// (async () => {
-//     const tokenA = { symbol: "WAX", contract: "eosio.token" };
-//     const tokenB = { symbol: "TLM", contract: "alien.worlds" };
-//     const quantity = Number.parseFloat(40000).toFixed(8);
-//     const tokenPair = { base: "WAX", quote: "BTK" };
+(async () => {
+    const tokenA = { symbol: "WAX", contract: "eosio.token" };
+    const tokenB = { symbol: "TLM", contract: "alien.worlds" };
+    const quantity = Number.parseFloat(40000).toFixed(8);
+    const tokenPair = { baseSymbol: "WAX", quoteSymbol: "YGD" };
 
-//     console.log("---------------------");
+    console.log("---------------------");
 
-//     const priceImpact = await PoolData.getPriceImpact(tokenA, tokenB, quantity);
-//     // console.log(priceImpact);
+    const priceImpact = await PoolData.getPriceImpact(tokenA, tokenB, quantity);
+    // console.log(priceImpact);
 
-//     const price = await PoolData.getPrices(tokenPair);
-//     console.log(price);
-// })();
+    const price = await PoolData.getPrices(tokenPair);
+    console.log(price);
+})();

@@ -31,7 +31,6 @@ class Trader extends Tx {
         const priceImpact = await PoolData.getPriceImpact(this.tokenPair.base, this.tokenPair.quote, this.baseBid);
         const spread = Math.abs(100 - (poolPrice / bestPrice) * 100) - priceImpact;
         const maxQuoteBid = this.baseBid / poolPrice;
-        console.log(maxQuoteBid, poolPrice);
 
         this.quoteBid = maxQuoteBid;
         this.order[side] = await MarketData.checkMyOrder(side, this.tokenPair, this.order[side]);
@@ -71,18 +70,11 @@ class BuySwap extends Trader {
     // prettier-ignore
     async lookUp() {
         console.log("Fetching", this.tokenPair.market);
-
-        // const quoteBalance = await rpc.getAssetBalance(this.tokenPair.quoteContract, this.address, this.tokenPair.quoteSymbol);
-        // const bestBuy = await MarketData.getBestPrice("buy", this.tokenPair, this.address);
-        // const poolData = await PoolData.getPoolData(this.tokenPair);
-        // const priceImpact = await PoolData.getPriceImpact(poolData.liquidity, this.tokenPair, this.baseBid);
-        // const spread = (100 - (bestBuy / poolData.price) * 100) - priceImpact;
-        // const maxQuoteBalance = this.baseBid * bestBuy;
-
-        // this.order = await MarketData.checkMyOrder("buy", this.tokenPair, this.order);
         const tradeData = await this.checkSide("buy");
         const quoteBalance = await rpc.getAssetBalance(this.tokenPair.quoteContract, this.address, this.tokenPair.quoteSymbol);
         const quotePercentage = (quoteBalance / tradeData.maxQuoteBid) * 100;
+
+        console.log("spread", tradeData.spread);
 
         if (quotePercentage >= config.QUOTE_LIMIT_PERCENTAGE) {
             await super.swapForBase(quoteBalance, tradeData.poolPrice, this.tokenPair);
@@ -126,17 +118,6 @@ class SwapSell extends Trader {
     // prettier-ignore
     async lookUp() {
         console.log("Fetching", this.tokenPair.market);
-
-        // const quoteBalance = await rpc.getAssetBalance(this.tokenPair.quoteContract, this.address, this.tokenPair.quoteSymbol);
-        // const bestSell = await MarketData.getBestPrice("sell", this.tokenPair, this.address);
-        // const poolData = await PoolData.getPoolData(this.tokenPair);
-        // const priceImpact = await PoolData.getPriceImpact(poolData.liquidity, this.tokenPair, this.baseBid);
-        // const spread = (100 - (poolData.price / bestSell) * 100) - priceImpact;
-        // const maxQuoteBid = this.baseBid / poolData.price;
-        // this.quoteBid = maxQuoteBid;
-
-        // this.order = await MarketData.checkMyOrder("sell", this.tokenPair, this.order);
-
         const tradeData = await this.checkSide("sell");
         const quoteBalance = await rpc.getAssetBalance(this.tokenPair.quoteContract, this.address, this.tokenPair.quoteSymbol);
         const orderBid = this.order["sell"]?.bid ?? 0
