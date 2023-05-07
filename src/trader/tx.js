@@ -170,6 +170,7 @@ class Tx {
     async swapForBase(quoteQty, poolPrice, tokenPair) {
         const priceImpact = await PoolData.getPriceImpact(tokenPair.base, tokenPair.quote, quoteQty);
         let baseAmountOut = quoteQty * poolPrice;
+        console.log("base", baseAmountOut, priceImpact);
         
         baseAmountOut = baseAmountOut - baseAmountOut * (priceImpact / 100);
         baseAmountOut = Utils.fix(baseAmountOut, tokenPair.baseDecimals);
@@ -286,9 +287,9 @@ class Tx {
     async update(order, price, bid, pair, side) {
             const isLive = Helpers.isLive(order);
 
-            if(bid <= pair.minBuy) return;
-            if(bid <= pair.minSell) return;
-    
+            if(side === "buy" && bid <= pair.minBuy) return;
+            if(side === "sell" && bid <= pair.minSell) return;
+
             if (isLive) {
                 const needPriceUpdate = Helpers.needUpdate(order, price, bid);
                 if (needPriceUpdate) {
