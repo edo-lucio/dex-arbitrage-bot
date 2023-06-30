@@ -35,7 +35,7 @@ module.exports = Object.freeze({
 
     MAX_TX_FEE: 0,
 
-    BID_UPDATE_THRESHOLD: 4, // in wax; minimum bid size that triggers an update if an order with such size is placed at a better price
+    BID_UPDATE_THRESHOLD: 1, // in wax; minimum bid size that triggers an update if an order with such size is placed at a better price
 
     PRICE_INCREMENT: 1,
 

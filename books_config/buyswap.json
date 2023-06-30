@@ -1,26 +1,8 @@
 {
     "books": [
         {
-            "market": { "base_token": "WAX", "quote_token": "BTK" },
-            "bid": 50,
-            "spread": 2.0,
-            "wait": 0
-        },
-        {
-            "market": { "base_token": "WAX", "quote_token": "MARTIA" },
-            "bid": 21,
-            "spread": 1.0,
-            "wait": 0
-        },
-        {
-            "market": { "base_token": "WAX", "quote_token": "LOOT" },
-            "bid": 21,
-            "spread": 1.0,
-            "wait": 0
-        },
-        {
-            "market": { "base_token": "WAX", "quote_token": "YGD" },
-            "bid": 21,
+            "market": { "base_token": "WAX", "quote_token": "SHING" },
+            "bid": 8,
             "spread": 1.0,
             "wait": 0
         }

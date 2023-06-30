@@ -2,20 +2,15 @@
 const fetch = require("node-fetch");
 const util = require("util");
 
-const {
-    Token,
-    Pool,
-    Trade,
-    CurrencyAmount,
-    Percent,
-} = require("@alcorexchange/alcor-swap-sdk");
-
+const { Token, Pool } = require("@alcorexchange/alcor-swap-sdk");
 const { RpcWrapper } = require("wax-bot-lib");
 
 const { asset } = require("eos-common");
 
 const consts = require("../../consts");
-const rpc = new RpcWrapper("https://waxnode02.alcor.exchange");
+const config = require("../../config");
+
+const rpc = new RpcWrapper(config.SERVER_ENDPOINT);
 
 function getQuoteToken(tokenA, tokenB, tokenPair) {
     if (tokenA.symbol === tokenPair.quoteSymbol) {
@@ -102,7 +97,7 @@ class PoolData {
         try {
             const response = await fetch(url);
             const data = await response.json();
-            return parseFloat(data.priceImpact) + consts.FEES;
+            return parseFloat(data.priceImpact) + consts.FEES + 1;
         } catch (error) {
             console.log(error);
             return this.getPriceImpact(tokenA, tokenB, quantity);
@@ -112,17 +107,17 @@ class PoolData {
 
 module.exports = { PoolData };
 
-(async () => {
-    const tokenA = { symbol: "WAX", contract: "eosio.token" };
-    const tokenB = { symbol: "TLM", contract: "alien.worlds" };
-    const quantity = Number.parseFloat(40000).toFixed(8);
-    const tokenPair = { baseSymbol: "WAX", quoteSymbol: "YGD" };
+// (async () => {
+//     const tokenA = { symbol: "WAX", contract: "eosio.token" };
+//     const tokenB = { symbol: "TLM", contract: "alien.worlds" };
+//     const quantity = Number.parseFloat(40000).toFixed(8);
+//     const tokenPair = { baseSymbol: "WAX", quoteSymbol: "YGD" };
 
-    console.log("---------------------");
+//     console.log("---------------------");
 
-    const priceImpact = await PoolData.getPriceImpact(tokenA, tokenB, quantity);
-    // console.log(priceImpact);
+//     const priceImpact = await PoolData.getPriceImpact(tokenA, tokenB, quantity);
+//     // console.log(priceImpact);
 
-    const price = await PoolData.getPrices(tokenPair);
-    console.log(price);
-})();
+//     const price = await PoolData.getPrices(tokenPair);
+//     console.log(price);
+// })();

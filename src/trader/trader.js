@@ -32,6 +32,8 @@ class Trader extends Tx {
         const spread = Math.abs(100 - (poolPrice / bestPrice) * 100) - priceImpact;
         const maxQuoteBid = this.baseBid / poolPrice;
 
+        console.log("pool price", poolPrice);
+
         this.quoteBid = maxQuoteBid;
         this.order[side] = await MarketData.checkMyOrder(side, this.tokenPair, this.order[side]);
 
@@ -73,8 +75,6 @@ class BuySwap extends Trader {
         const tradeData = await this.checkSide("buy");
         const quoteBalance = await rpc.getAssetBalance(this.tokenPair.quoteContract, this.address, this.tokenPair.quoteSymbol);
         const quotePercentage = (quoteBalance / tradeData.maxQuoteBid) * 100;
-
-        console.log("spread", tradeData.spread);
 
         if (quotePercentage >= config.QUOTE_LIMIT_PERCENTAGE) {
             await super.swapForBase(quoteBalance, tradeData.poolPrice, this.tokenPair);
