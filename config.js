@@ -39,9 +39,10 @@ module.exports = Object.freeze({
 
     PRICE_INCREMENT: 1,
 
-    SERVER_ENDPOINT: "http://eu.wax.eosrio.io",
+    SERVER_ENDPOINT: "https://wax.eosphere.io",
 
     BANNED_TOKENS_CONTRACTS: [
+        "essentianova",
         "underwtokens",
         "metaversedmt",
         "shmothership",
