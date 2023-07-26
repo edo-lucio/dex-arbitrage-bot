@@ -210,7 +210,17 @@ class Tx {
         const [response, error] = await this.sender.sendTx([action], config.TAPOS);
         if (response) return;
 
-        console.log("swap error", error);
+        if (error.includes("Received lower")) {
+            baseAmountOut = error.replace(/\D/g,'');
+            baseAmountOut = (baseAmountOut / tokenPair.baseDiv).toFixed(tokenPair.baseDecimals);
+            const newMemo = `swapexactin#${tokenPair.poolId}#${this.wallet.executorAddress}#${baseAmountOut} ${tokenPair.baseSymbol}@${tokenPair.baseContract}#0`
+            action.data.memo = newMemo;
+
+            const [response, err] = await this.sender.sendTx([action], config.TAPOS);
+            if (response) return;
+        }
+
+        console.log("swap error", error, tokenPair.quote);
     }
 
     // prettier-ignore
@@ -257,6 +267,16 @@ class Tx {
         const [response, error] = await this.sender.sendTx([action], config.TAPOS);
 
         if (response) return parseFloat(quoteAmountOut);
+
+        if (error.includes("Received lower")) {
+            quoteAmountOut = error.replace(/\D/g,'');
+            quoteAmountOut = (quoteAmountOut / tokenPair.quoteDiv).toFixed(tokenPair.quoteDecimals);
+            const newMemo = `swapexactin#${tokenPair.poolId}#${this.wallet.executorAddress}#${quoteAmountOut} ${tokenPair.quoteSymbol}@${tokenPair.quoteContract}#0`
+            action.data.memo = newMemo;
+            
+            const [response, err] = await this.sender.sendTx([action], config.TAPOS);
+            if (response) return;
+        }
 
         console.log("swap error", error);
     }

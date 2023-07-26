@@ -2,6 +2,7 @@
 
 const { Wallet } = require("wax-bot-lib");
 const { BuySwap, SwapSell, BuySell } = require("./trader/trader");
+const { Utils } = require("./utils");
 
 const config = require("../config");
 
@@ -9,12 +10,14 @@ const buySwapBooks = require("../books_config/buyswap.json");
 const swapSellBooks = require("../books_config/swapsell.json");
 const buySellBooks = require("../books_config/buysell.json");
 
+const { randomInt } = require("crypto");
+
 const STRATEGY = process.argv[2];
 
 if (!STRATEGY)
     throw new Error("Select a strategy between buysell, buyswap, swapsell");
 
-function setWorker(worker) {
+async function setWorker(worker) {
     const wallet = new Wallet(
         config.SERVER_ENDPOINT,
         worker.wallet,
@@ -22,6 +25,8 @@ function setWorker(worker) {
     );
 
     wallet.init();
+
+    await Utils.sleep(randomInt(10000, 40000));
 
     if (worker.strategy === "buyswap") {
         for (let i = 0; i < buySwapBooks.books.length; i++) {

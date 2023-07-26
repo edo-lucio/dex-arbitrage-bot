@@ -22,14 +22,32 @@ class Trader extends Tx {
         this.wait = tradeData.wait;
 
         this.order = {};
+        this.lastTime = Date.now();
+    }
+
+    async updatePriceImpact() {
+        if (Date.now() - this.lastTime > 180000) {
+            this.lastTime = Date.now();
+            console.log("Updating price impact");
+            const priceImpact = await PoolData.getPriceImpact(
+                this.tokenPair.base,
+                this.tokenPair.quote,
+                this.baseBid
+            );
+
+            return priceImpact;
+        }
+
+        return this.priceImpact;
     }
 
     // prettier-ignore
     async checkSide(side) {
         const bestPrice = await MarketData.getBestPrice(side, this.tokenPair, this.address);
         const poolPrice = await PoolData.getPrices(this.tokenPair);
-        const priceImpact = await PoolData.getPriceImpact(this.tokenPair.base, this.tokenPair.quote, this.baseBid);
-        const spread = Math.abs(100 - (poolPrice / bestPrice) * 100) - priceImpact;
+        this.priceImpact = await this.updatePriceImpact();
+
+        const spread = Math.abs(100 - (poolPrice / bestPrice) * 100) - this.priceImpact;
         const maxQuoteBid = this.baseBid / poolPrice;
 
         console.log("pool price", poolPrice);
@@ -41,7 +59,7 @@ class Trader extends Tx {
             maxQuoteBid: maxQuoteBid,
             bestPrice: bestPrice,
             poolPrice: poolPrice,
-            priceImpact: priceImpact,
+            priceImpact: this.priceImpact,
             spread: spread,
         }
     }
@@ -63,6 +81,13 @@ class BuySwap extends Trader {
 
         this.order["buy"] = myOrder[0];
 
+        // initialize price impact
+        this.priceImpact = await PoolData.getPriceImpact(
+            this.tokenPair.base,
+            this.tokenPair.quote,
+            this.baseBid
+        );
+
         while (true) {
             await this.lookUp();
             await Utils.sleep(this.wait);
@@ -75,6 +100,8 @@ class BuySwap extends Trader {
         const tradeData = await this.checkSide("buy");
         const quoteBalance = await rpc.getAssetBalance(this.tokenPair.quoteContract, this.address, this.tokenPair.quoteSymbol);
         const quotePercentage = (quoteBalance / tradeData.maxQuoteBid) * 100;
+        
+        console.log("pi", this.priceImpact);
 
         if (quotePercentage >= config.QUOTE_LIMIT_PERCENTAGE) {
             await super.swapForBase(quoteBalance, tradeData.poolPrice, this.tokenPair);
@@ -108,6 +135,13 @@ class SwapSell extends Trader {
         );
 
         this.order["sell"] = myOrder[0];
+
+        // initialize price impact
+        this.priceImpact = await PoolData.getPriceImpact(
+            this.tokenPair.base,
+            this.tokenPair.quote,
+            this.baseBid
+        );
 
         while (true) {
             await this.lookUp();
@@ -155,6 +189,13 @@ class BuySell extends Trader {
 
         const myBuys = buyOrders.filter((order) => order.account === this.address);
         const mySells = sellOrders.filter((order) => order.account === this.address);
+
+        // initialize price impact
+        this.priceImpact = await PoolData.getPriceImpact(
+            this.tokenPair.base,
+            this.tokenPair.quote,
+            this.baseBid
+        );
 
         this.order["buy"] = myBuys[0];
         this.order["sell"]  = mySells[0];
