@@ -9,6 +9,7 @@ const { asset } = require("eos-common");
 
 const consts = require("../../consts");
 const config = require("../../config");
+const { Utils } = require("../utils");
 
 const rpc = new RpcWrapper(config.SERVER_ENDPOINT);
 
@@ -97,7 +98,7 @@ class PoolData {
         try {
             const response = await fetch(url);
             const data = await response.json();
-            return parseFloat(data.priceImpact) + consts.FEES + 1;
+            return parseFloat(data.priceImpact) + consts.FEES;
         } catch (error) {
             console.log(error);
             return this.getPriceImpact(tokenA, tokenB, quantity);
