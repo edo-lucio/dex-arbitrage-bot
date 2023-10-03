@@ -1,4 +1,4 @@
-## Arbitrage/Trading Bot on Decentralized Exchange
+# Arbitrage/Trading Bot on Decentralized Exchange
 This project is a trading bot that performs safe arbitrages between the orderbooks and liquidity pools on a decentralized exchange of a niche blockchain. 
 
 As of 3/10/2023 the project is still working, providing a low but consistent profit every month.
@@ -14,13 +14,13 @@ To run it, after having configured the settings in the configuration file, it su
   - 
 ** NOTE: These strategies only work when the spread between the orderbook and liquidity pools is greater/equal than the input spread in the `config.js` file.
 
-# Buy Swap (Arbitrage)
+## Buy Swap (Arbitrage)
 Place orders at the best buying price in the orderbook, to swap it on the LP as soon as it gets filled.
 
-# Swap Sell
+## Swap Sell
 Swap on the LP, to place sell orders on the orderbook. 
 
-# Buy Sell 
+## Buy Sell 
 Place buy orders, to sell orders once the buy one gets filled.
 
 To run it, it is necessary to have `pm2` installed
