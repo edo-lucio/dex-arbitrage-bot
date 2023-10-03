@@ -11,7 +11,7 @@ To run it, after having configured the settings in the configuration file, it su
   - buyswap
   - swapsell
   - buysell
-  - 
+
 ** NOTE: These strategies only work when the spread between the orderbook and liquidity pools is greater/equal than the input spread in the `config.js` file.
 
 ## Buy Swap (Arbitrage)
